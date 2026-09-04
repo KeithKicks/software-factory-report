@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Build report for The Software Factory: what got built, what is real, the audit, and what changed after Phases A and B.">
+<title>The Software Factory — Build Report</title>
+</head>
+<body>
+<style>
+  :root {
+    --page: #f4f5f7; --surface: #ffffff; --surface-2: #eceef1;
+    --ink: #14161a; --ink-2: #565b64; --ink-3: #8a8f98; --line: #dfe2e7;
+    --accent: #2a78d6; --accent-ink: #1c5cab;
+    --good: #0a7d2c; --warn: #9a6700; --crit: #c03535;
+    --chip-good: #e2f2e6; --chip-warn: #faf0d7; --chip-crit: #fbe4e4; --chip-sim: #e7ecf6;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #0d0d0d; --surface: #1a1a19; --surface-2: #232322;
+      --ink: #f5f5f2; --ink-2: #c3c2b7; --ink-3: #898781; --line: #2c2c2a;
+      --accent: #3987e5; --accent-ink: #6da7ec;
+      --good: #35c235; --warn: #fab219; --crit: #e46262;
+      --chip-good: #12310f; --chip-warn: #38290a; --chip-crit: #3a1414; --chip-sim: #1c2536;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #0d0d0d; --surface: #1a1a19; --surface-2: #232322;
+    --ink: #f5f5f2; --ink-2: #c3c2b7; --ink-3: #898781; --line: #2c2c2a;
+    --accent: #3987e5; --accent-ink: #6da7ec;
+    --good: #35c235; --warn: #fab219; --crit: #e46262;
+    --chip-good: #12310f; --chip-warn: #38290a; --chip-crit: #3a1414; --chip-sim: #1c2536;
+  }
+
+  body { background: var(--page); color: var(--ink); font-family: var(--sans);
+         font-size: 15.5px; line-height: 1.65; margin: 0; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  header.hero { border-bottom: 2px solid var(--ink); padding-bottom: 28px; margin-bottom: 8px; }
+  .mark { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono);
+          font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+  .mark::before { content: ""; width: 22px; height: 22px; border-radius: 6px;
+                  background: linear-gradient(135deg, #3987e5, #9085e9); }
+  h1 { font-size: clamp(30px, 5vw, 42px); font-weight: 800; letter-spacing: -0.025em;
+       line-height: 1.08; margin: 14px 0 10px; text-wrap: balance; }
+  .sub { color: var(--ink-2); font-size: 16px; max-width: 60ch; }
+  .meta { font-family: var(--mono); font-size: 12px; color: var(--ink-3); margin-top: 16px; }
+
+  .statgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+              background: var(--line); border: 1px solid var(--line); border-radius: 10px;
+              overflow: hidden; margin: 28px 0 8px; }
+  @media (max-width: 700px) { .statgrid { grid-template-columns: repeat(2, 1fr); } }
+  .stat { background: var(--surface); padding: 16px 16px 13px; }
+  .stat b { display: block; font-family: var(--mono); font-size: 24px; font-weight: 700;
+            letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 12px; color: var(--ink-3); font-weight: 600; }
+
+  .eyebrow { font-family: var(--mono); font-size: 11.5px; font-weight: 700;
+             letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-ink);
+             margin: 52px 0 10px; display: flex; align-items: center; gap: 10px; }
+  .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  h2 { font-size: 24px; font-weight: 750; letter-spacing: -0.015em; margin: 0 0 14px; text-wrap: balance; }
+  h3 { font-size: 16.5px; font-weight: 700; margin: 24px 0 8px; }
+  p { margin: 0 0 14px; max-width: 70ch; }
+  .lead { font-size: 17px; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 6px; max-width: 66ch; }
+  strong { font-weight: 650; }
+  a { color: var(--accent-ink); }
+
+  code, .mono { font-family: var(--mono); font-size: 0.88em; }
+  pre { background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+        padding: 14px 16px; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.6; }
+  code.inline { background: var(--surface-2); border-radius: 4px; padding: 1px 6px; }
+
+  .pillars { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 18px 0; }
+  .pillar { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 11px 13px; }
+  .pillar .n { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); letter-spacing: 0.1em; }
+  .pillar .t { font-weight: 650; font-size: 13.5px; line-height: 1.35; margin: 2px 0 6px; }
+  .chip { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em;
+          padding: 2px 8px; border-radius: 999px; text-transform: uppercase; }
+  .chip.live { background: var(--chip-good); color: var(--good); }
+  .chip.sim  { background: var(--chip-sim); color: var(--accent-ink); }
+  .chip.warn { background: var(--chip-warn); color: var(--warn); }
+  .chip.crit { background: var(--chip-crit); color: var(--crit); }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; margin: 16px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; background: var(--surface); }
+  th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+       text-transform: uppercase; color: var(--ink-3); padding: 10px 14px;
+       border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .callout { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+             border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+  .callout.good { border-left-color: var(--good); }
+  .callout.warn { border-left-color: var(--warn); }
+
+  .quotes { display: grid; gap: 10px; margin: 16px 0; }
+  .quote { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 13px 17px; }
+  .quote .who { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em;
+                text-transform: uppercase; color: var(--accent-ink); font-weight: 700; }
+  .quote p { margin: 4px 0 0; font-size: 14.5px; }
+
+  .timeline { border-left: 2px solid var(--line); padding-left: 16px; margin: 16px 0; }
+  .timeline .step { position: relative; margin-bottom: 14px; }
+  .timeline .step::before { content: ""; position: absolute; left: -21.5px; top: 7px; width: 9px; height: 9px;
+                            border-radius: 50%; background: var(--good); border: 2px solid var(--surface); }
+  .timeline .step.next::before { background: var(--surface-2); border-color: var(--ink-3); }
+  .timeline .when { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.08em; }
+
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line);
+           font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="mark">The Software Factory · Build Report</div>
+    <h1>Fourteen pillars, one running machine.</h1>
+    <p class="sub">Built from scratch in <code class="inline">~/Software Factory Fable</code>: a working
+    platform, its dashboard, its documentation library, an independent audit, and now a build engine
+    that produces real code and runs real tests.</p>
+    <div class="meta">JULY 11 2026 · UPDATED AFTER PHASES A AND B · FOR KEITH · BUILT AND AUDITED BY CLAUDE</div>
+
+    <div class="statgrid">
+      <div class="stat"><b>52/52</b><span>tests passing</span></div>
+      <div class="stat"><b>73</b><span>API endpoints (v1)</span></div>
+      <div class="stat"><b>14</b><span>dashboard pages</span></div>
+      <div class="stat"><b>26</b><span>database tables</span></div>
+      <div class="stat"><b>9,800</b><span>lines of code</span></div>
+      <div class="stat"><b>36k</b><span>words of docs</span></div>
+      <div class="stat"><b>0</b><span>API keys required</span></div>
+      <div class="stat"><b>11</b><span>commits, clean history</span></div>
+    </div>
+  </header>
+
+  <div class="eyebrow">Start here</div>
+  <h2>One command, then look around</h2>
+  <pre>cd "/Users/keithkicks/Software Factory Fable"
+make api        # http://localhost:8100</pre>
+  <p>The database is seeded and the frontend is built. The <strong>Command Center</strong> is the
+  daily check-in. The <strong>Build Queue</strong> shows every build, and opening one shows the files it
+  produced. The API contract is at <code class="inline">/api/v1/docs</code>. Tests run with
+  <code class="inline">make test</code>; fresh demo data with <code class="inline">make seed</code>.</p>
+
+  <div class="eyebrow">What got built</div>
+  <h2>Two systems, plus the company around them</h2>
+  <p class="lead"><strong>The Forge</strong> interviews clients. Seven requirement categories, one
+  question at a time, always aimed at the weakest category. At 85% completeness a session seals into
+  a structured specification.</p>
+  <p class="lead"><strong>The Factory</strong> pulls sealed specifications through a queued build
+  pipeline: analysis, code generation, tests, packaging. A failed test run sends the project back for
+  another iteration, three at most. Define, build, test, refine, all visible on screen.</p>
+  <p>Around those two systems, the operating disciplines from William's memo run as code:</p>
+
+  <div class="pillars">
+    <div class="pillar"><div class="n">P01</div><div class="t">SDLC Framework</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P02</div><div class="t">Compliance &amp; Trust</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P03</div><div class="t">Cost Engineering</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P04</div><div class="t">Incident Response</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P05</div><div class="t">API-First Architecture</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P06</div><div class="t">Quality Metrics</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P07</div><div class="t">AI Governance</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P08</div><div class="t">Multi-Tenancy</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P09</div><div class="t">Knowledge Management</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P10</div><div class="t">SLAs &amp; Reliability</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P11</div><div class="t">Client Lifecycle</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P12</div><div class="t">Change Management</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P13</div><div class="t">Scalability (queue)</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P14</div><div class="t">Vendor Risk</div><span class="chip live">live</span></div>
+  </div>
+
+  <p>In practice that means: a tenant-scoped credential vault, encrypted at rest, where every read is
+  logged. An append-only audit trail with data classifications. A cost ledger where every token and
+  every sandbox minute lands attributed to a tenant, a project, and a build, then rolls up into
+  margins, projections, and budget alarms. Incidents with P1 to P4 response clocks and postmortems.
+  A model registry with versioned prompts, fallback chains, and benchmark history. SLA tiers with
+  measured uptime and error budgets. Change proposals with computed impact analysis and per-tenant
+  feature flags. A pattern library where patterns earn their rank. A client lifecycle that provisions
+  in one call and offboards without leaving a credential behind.</p>
+
+  <div class="eyebrow">What is real today</div>
+  <h2>Real files, real tests, one gap left</h2>
+  <div class="callout good">
+    <strong>The build engine produces software.</strong> Each build writes a runnable FastAPI service to
+    disk from the sealed specification, then runs that service's own test suite. The pass and fail counts
+    on the dashboard are the results of tests that actually executed. A failed run triggers the next
+    iteration for real, and quality metrics are computed from those outcomes.
+  </div>
+  <div class="callout">
+    <strong>Two generators share one output.</strong> With no API key, a deterministic template writes a
+    working service whose handler answers from the specification. With a key configured, the governed
+    router asks the code generation model for the application and its tests, and iteration two onward
+    receives the previous failure report so the model can fix what broke. The template path is exercised
+    end to end. The model path exists in code and has not yet been run with a real key.
+  </div>
+  <div class="callout warn">
+    <strong>The remaining gap is deployment.</strong> A passed build is a folder of tested code with a
+    README. It does not yet launch on a port with a live URL. That is Phase C, planned and scoped, and it
+    needs no Docker. Two honest footnotes: in mock mode builds pass deterministically, since a template
+    passes its own tests; and the simulated per-stage token costs are still recorded in mock mode so the
+    unit economics behave like production, labeled as simulated in the ledger.
+  </div>
+
+  <div class="eyebrow">Since the overnight build</div>
+  <h2>What changed after the first report</h2>
+  <div class="timeline">
+    <div class="step"><div class="when">PHASE A · JULY 11</div>
+      <strong>Real code generation.</strong> The codegen stage writes five files per build to
+      <code class="inline">generated/{project}/{build}/</code>. The tests stage runs pytest against them.
+      First live build: Driver Settlement Calculator, iteration 3, 5 of 5 tests executed and passing,
+      $29.10 attributed.</div>
+    <div class="step"><div class="when">PHASE B · JULY 11</div>
+      <strong>Artifact viewer and download.</strong> Open any build in the dashboard and read each file
+      it produced, or download the workspace as a zip. Only files in the build's manifest are served,
+      and the path is confined to the workspace.</div>
+    <div class="step"><div class="when">HOUSEKEEPING · JULY 11</div>
+      <strong>Clean history.</strong> The seeded database had been tracked since the first commit. The
+      history was rewritten to remove it before the repository is shared anywhere. Unknown API paths now
+      return a proper 404 instead of the UI shell.</div>
+    <div class="step next"><div class="when">PHASE C · NEXT</div>
+      <strong>Run what was built.</strong> Launch a passed build on a port and record its URL, using the
+      process-based provider from the original machine. No Docker on this Mac, none needed.</div>
+  </div>
+
+  <div class="eyebrow">Independent audit</div>
+  <h2>Audited before it was reported</h2>
+  <p>Before the first version of this page existed, a five-lens adversarial audit ran over the code:
+  backend correctness, security, tenant isolation, frontend correctness, data integrity. Each finding
+  went to a separate verifier instructed to refute it by tracing the real code path.</p>
+
+  <div class="statgrid" style="margin-top:20px">
+    <div class="stat"><b>17</b><span>findings raised</span></div>
+    <div class="stat"><b>11</b><span>confirmed real</span></div>
+    <div class="stat"><b>11</b><span>fixed and committed</span></div>
+    <div class="stat"><b>5</b><span>refuted, correctly</span></div>
+  </div>
+
+  <div class="callout warn" style="margin-top:18px">
+    <strong>One was critical.</strong> A path traversal hole in the static file route let an encoded
+    <code class="inline">../</code> read arbitrary files, including the database with every encrypted
+    credential. It is now confined to the build directory with a regression test, and all three attack
+    URLs were verified live to return the harmless app shell.
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Sev</th><th>Finding</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip crit">crit</span></td><td>Path traversal in static route</td><td>Path confined to dist; regression test; verified live</td></tr>
+        <tr><td><span class="chip warn">major</span></td><td>Offboarding left builds running and billing</td><td>Cancels outstanding builds before the final export</td></tr>
+        <tr><td><span class="chip warn">major</span></td><td>A build failure could crash the pulse tick</td><td>Auto-requeue degrades to a log event</td></tr>
+        <tr><td><span class="chip warn">major</span></td><td>Drawers showed the previously viewed record</td><td>Poll refetches on selection change</td></tr>
+        <tr><td><span class="chip warn">major</span></td><td>Knowledge search did nothing</td><td>Refetches on filter; verified 10 results to 2</td></tr>
+        <tr><td><span class="chip sim">minor</span></td><td>Doubled mock cost events</td><td>Router and synthesized cost made exclusive</td></tr>
+        <tr><td><span class="chip sim">minor</span></td><td>Projection could fall below spend</td><td>Uses the real month length</td></tr>
+        <tr><td><span class="chip sim">minor</span></td><td>Three smaller (audit gap, chart, seed)</td><td>All fixed</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:14px;color:var(--ink-3)">Refuted correctly, no change made: a non-constant-time key
+  compare and OpenAPI exposure (the server binds to localhost only), the documented local-dev vault key,
+  and two checks against code that had already been fixed.</p>
+
+  <div class="eyebrow">What it cost to build</div>
+  <h2>Build economics</h2>
+  <p>Figures below cover the overnight build that produced the first version of this page. The Phase A
+  and B follow-up was a small fraction of that and is not separately metered. Token counts are measured;
+  the dollar figure is an estimate, not an invoice.</p>
+
+  <div class="statgrid" style="margin-top:20px">
+    <div class="stat"><b>9,800</b><span>lines of code now</span></div>
+    <div class="stat"><b>36,400</b><span>words of docs</span></div>
+    <div class="stat"><b>3.79M</b><span>subagent tokens, measured</span></div>
+    <div class="stat"><b>$180–420</b><span>estimated cost, overnight</span></div>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Item</th><th>Amount</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Subagent output tokens, 52 agents in 3 workflows</td><td>3,794,672</td><td>measured</td></tr>
+        <tr><td>Docs library (18 agents)</td><td>1,146,588</td><td>measured</td></tr>
+        <tr><td>Frontend pages (12 agents)</td><td>937,854</td><td>measured</td></tr>
+        <tr><td>Adversarial audit (22 agents)</td><td>1,710,230</td><td>measured</td></tr>
+        <tr><td>Main conversation output</td><td>400k to 600k tokens</td><td>estimate</td></tr>
+        <tr><td>Total generation</td><td>4.2M to 4.4M output tokens</td><td>estimate</td></tr>
+        <tr><td><strong>Estimated cost, overnight build</strong></td><td><strong>$180 to $420</strong></td><td>estimate</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:14px;color:var(--ink-3)">The dollar range assumes output tokens dominate the cost of
+  agentic coding at frontier output pricing of roughly $15 to $75 per million, plus cached input reads.
+  For an exact figure, check the session's usage against the plan. Roughly one line of committed, tested,
+  audited code per 460 output tokens; the rest bought the documentation library, the audit, and browser
+  verification.</p>
+
+  <div class="eyebrow">Saying it out loud</div>
+  <h2>How to explain it</h2>
+  <div class="quotes">
+    <div class="quote"><div class="who">Plain</div>
+      <p>A software company in a box. It interviews the client, builds the software, tests it, and runs
+      the business disciplines around the work on its own.</p></div>
+    <div class="quote"><div class="who">Technical</div>
+      <p>A multi-tenant FastAPI and React platform where a completeness-scored intake engine feeds a
+      queued build pipeline that writes and tests real code, with cost attribution, model governance,
+      audit, SLA, and incident systems built into every operation.</p></div>
+    <div class="quote"><div class="who">Investor</div>
+      <p>The operating chassis of an AI software agency. The fourteen disciplines an acquirer checks in
+      diligence run as code from the first commit, and the build engine already produces tested
+      software.</p></div>
+    <div class="quote"><div class="who">Client-facing</div>
+      <p>We interview you until your idea is specific enough to build. Then the machine builds it, tests
+      it against your own requirements, and shows its work, including what it cost and how reliable it
+      is.</p></div>
+    <div class="quote"><div class="who">Skeptical buyer</div>
+      <p>The ledger is real, the state machines are real, the isolation tests are real, and the builds
+      write and test real code. The one thing it does not do yet is launch that code on a server. The
+      repository says so plainly.</p></div>
+  </div>
+
+  <div class="eyebrow">Next</div>
+  <h2>What needs a decision</h2>
+  <ol>
+    <li><strong>Phase C, deployment.</strong> A passed build launches on a port and gets a URL. Medium
+        effort, no Docker required.</li>
+    <li><strong>The idle queue.</strong> The pulse moved every project to review overnight, and delivery
+        is a human step by design, so the live queue sits empty. Either keep that honest gate, or let
+        the pulse also pull review projects that have no passing build yet.</li>
+    <li><strong>Live model keys.</strong> Only if you want model-written code instead of the template:
+        set <code class="inline">ANTHROPIC_API_KEY</code> and <code class="inline">FACTORY_MOCK_MODE=false</code>.
+        Everything else already works without them.</li>
+  </ol>
+
+  <footer>SOFTWARE FACTORY FABLE · REPORT.md IN THE REPO HOLDS THE FULL MATRIX AND FILE MAP ·
+  13 PILLAR DOCS, 5 RUNBOOKS, 6 ADRS IN /docs</footer>
+</div>
+
+</body>
+</html>
