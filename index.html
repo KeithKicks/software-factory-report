@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Build report for The Software Factory: what got built, what is real, the audit, and what changed after Phases A and B.">
-<title>The Software Factory — Build Report</title>
+<meta name="description" content="Build report for The Software Factory by Brooker Creek Works: what exists today, what has been independently checked, and what comes next.">
+<meta name="author" content="Keith, Brooker Creek Works">
+<title>The Software Factory: Build Report</title>
 </head>
 <body>
 <style>
@@ -115,179 +116,210 @@
   footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line);
            font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
 </style>
-
 <div class="wrap">
   <header class="hero">
     <div class="mark">The Software Factory · Build Report</div>
     <h1>Fourteen pillars, one running machine.</h1>
-    <p class="sub">Built from scratch: a working
-    platform, its dashboard, its documentation library, an independent audit, and now a build engine
-    that produces real code and runs real tests.</p>
-    <div class="meta">JULY 11 2026 · UPDATED AFTER PHASES A AND B · FOR KEITH · BUILT AND AUDITED BY CLAUDE</div>
+    <p class="sub">A system that interviews a client, turns the conversation into a precise plan, builds
+    working software from that plan, tests it, and keeps the business records around the work on its
+    own. This page explains what exists today, what has been checked, and what comes next.</p>
+    <div class="meta">BUILT JULY 2026 · UPDATED SEPTEMBER 4, 2026 · KEITH, BROOKER CREEK WORKS</div>
 
     <div class="statgrid">
-      <div class="stat"><b>52/52</b><span>tests passing</span></div>
-      <div class="stat"><b>73</b><span>API endpoints (v1)</span></div>
-      <div class="stat"><b>14</b><span>dashboard pages</span></div>
-      <div class="stat"><b>26</b><span>database tables</span></div>
+      <div class="stat"><b>52 of 52</b><span>automated checks passing</span></div>
+      <div class="stat"><b>73</b><span>ways to interact with the system (API)</span></div>
+      <div class="stat"><b>14</b><span>dashboard screens</span></div>
+      <div class="stat"><b>26</b><span>kinds of records it keeps</span></div>
       <div class="stat"><b>9,800</b><span>lines of code</span></div>
-      <div class="stat"><b>36k</b><span>words of docs</span></div>
-      <div class="stat"><b>0</b><span>API keys required</span></div>
-      <div class="stat"><b>11</b><span>commits, clean history</span></div>
+      <div class="stat"><b>36,000</b><span>words of documentation</span></div>
+      <div class="stat"><b>0</b><span>paid AI keys needed to run it</span></div>
+      <div class="stat"><b>11</b><span>saved versions, clean history</span></div>
     </div>
   </header>
 
-  <div class="eyebrow">What got built</div>
-  <h2>Two systems, plus the company around them</h2>
-  <p class="lead"><strong>The Forge</strong> interviews clients. Seven requirement categories, one
-  question at a time, always aimed at the weakest category. At 85% completeness a session seals into
-  a structured specification.</p>
-  <p class="lead"><strong>The Factory</strong> pulls sealed specifications through a queued build
-  pipeline: analysis, code generation, tests, packaging. A failed test run sends the project back for
-  another iteration, three at most. Define, build, test, refine, all visible on screen.</p>
-  <p>Around those two systems, the operating disciplines from William's memo run as code:</p>
-
-  <div class="pillars">
-    <div class="pillar"><div class="n">P01</div><div class="t">SDLC Framework</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P02</div><div class="t">Compliance &amp; Trust</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P03</div><div class="t">Cost Engineering</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P04</div><div class="t">Incident Response</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P05</div><div class="t">API-First Architecture</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P06</div><div class="t">Quality Metrics</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P07</div><div class="t">AI Governance</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P08</div><div class="t">Multi-Tenancy</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P09</div><div class="t">Knowledge Management</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P10</div><div class="t">SLAs &amp; Reliability</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P11</div><div class="t">Client Lifecycle</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P12</div><div class="t">Change Management</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P13</div><div class="t">Scalability (queue)</div><span class="chip live">live</span></div>
-    <div class="pillar"><div class="n">P14</div><div class="t">Vendor Risk</div><span class="chip live">live</span></div>
+  <div class="eyebrow">In plain terms</div>
+  <h2>What this is, in three paragraphs</h2>
+  <p class="lead">Most software projects fail in the gap between what a client means and what gets
+  built. The Software Factory closes that gap with a structured interview. It asks one question at a
+  time across seven areas (goals, users, connected systems, data, edge cases, security, budget and
+  timing) and keeps asking until the plan is complete enough to build from. Only then does it start
+  building.</p>
+  <p class="lead">Once a plan is sealed, the system writes the software, runs a set of tests against
+  it, and if anything fails, goes back and tries again, up to three times. Every step is visible on a
+  dashboard, and every dollar of computing cost is recorded against the client and project it belongs
+  to.</p>
+  <p class="lead">Around that core sit fourteen business disciplines that established software
+  companies are expected to have: security and audit trails, cost tracking, incident handling, service
+  level commitments, change control, vendor risk, and so on. Here they are not policy documents. They
+  are running parts of the system from the first day.</p>
+  <div class="callout">
+    <strong>How to read this page.</strong> Green tiles and callouts describe things that exist and work
+    today. Amber callouts describe gaps and next steps. Nothing below is a plan dressed up as a result;
+    where something is still ahead of us, it says so.
   </div>
 
-  <p>In practice that means: a tenant-scoped credential vault, encrypted at rest, where every read is
-  logged. An append-only audit trail with data classifications. A cost ledger where every token and
-  every sandbox minute lands attributed to a tenant, a project, and a build, then rolls up into
-  margins, projections, and budget alarms. Incidents with P1 to P4 response clocks and postmortems.
-  A model registry with versioned prompts, fallback chains, and benchmark history. SLA tiers with
-  measured uptime and error budgets. Change proposals with computed impact analysis and per-tenant
-  feature flags. A pattern library where patterns earn their rank. A client lifecycle that provisions
-  in one call and offboards without leaving a credential behind.</p>
+  <div class="eyebrow">What got built</div>
+  <h2>Two systems, plus the company around them</h2>
+  <p><strong>The Forge</strong> is the interview. It scores how complete the plan is in each of the
+  seven areas and always asks about the weakest one next. At 85 percent overall it seals the plan
+  into a specification the build side can work from.</p>
+  <p><strong>The Factory</strong> is the build line. Sealed plans wait in a queue. Each one moves
+  through four stages: analysis, code writing, testing, and packaging. A failed test sends the project
+  back for another attempt, three at most. Define, build, test, refine, all visible on screen.</p>
+  <p>Each tile below is a business discipline that runs as software rather than as a written policy:</p>
+
+  <div class="pillars">
+    <div class="pillar"><div class="n">P01</div><div class="t">Engineering standards</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P02</div><div class="t">Compliance and trust</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P03</div><div class="t">Cost tracking</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P04</div><div class="t">Incident response</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P05</div><div class="t">Stable interfaces</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P06</div><div class="t">Quality measurement</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P07</div><div class="t">AI model governance</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P08</div><div class="t">Client separation</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P09</div><div class="t">Knowledge capture</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P10</div><div class="t">Service level commitments</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P11</div><div class="t">Client lifecycle</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P12</div><div class="t">Change control</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P13</div><div class="t">Scalability</div><span class="chip live">live</span></div>
+    <div class="pillar"><div class="n">P14</div><div class="t">Vendor risk</div><span class="chip live">live</span></div>
+  </div>
+
+  <h3>What those disciplines do for a client</h3>
+  <ul>
+    <li>Client passwords and keys are stored encrypted, and every time one is used, that use is logged.</li>
+    <li>Every sensitive action leaves a permanent record of who did what, when, and for which client.</li>
+    <li>Every unit of AI and computing cost is attributed to a client, a project, and a build, then
+        rolled up into margins, monthly projections, and budget alarms.</li>
+    <li>Problems are tracked by severity with response time clocks, and each one closes with a written
+        review of what happened.</li>
+    <li>The AI models doing the work are chosen from a registry with recorded pricing and quality
+        scores, with a backup model ready if the primary one fails.</li>
+    <li>Reliability targets are measured against actual uptime, not assumed.</li>
+    <li>Changes to the system carry an impact assessment and can be rolled out to a few clients first.</li>
+    <li>Lessons and reusable patterns are kept and ranked by how well they worked.</li>
+    <li>Bringing a client on is one step. Taking a client off removes every credential and stops every
+        job that belongs to them.</li>
+  </ul>
 
   <div class="eyebrow">What is real today</div>
   <h2>Real files, real tests, one gap left</h2>
   <div class="callout good">
-    <strong>The build engine produces software.</strong> Each build writes a runnable FastAPI service to
-    disk from the sealed specification, then runs that service's own test suite. The pass and fail counts
-    on the dashboard are the results of tests that actually executed. A failed run triggers the next
-    iteration for real, and quality metrics are computed from those outcomes.
+    <strong>The build line produces software.</strong> Each build writes a small working web service
+    from the sealed plan, then runs that service's own automated tests. The pass and fail counts on the
+    dashboard come from tests that actually executed. A failed run genuinely triggers the next attempt,
+    and the quality figures are computed from those outcomes.
   </div>
   <div class="callout">
-    <strong>Two generators share one output.</strong> With no API key, a deterministic template writes a
-    working service whose handler answers from the specification. With a key configured, the governed
-    router asks the code generation model for the application and its tests, and iteration two onward
-    receives the previous failure report so the model can fix what broke. The template path is exercised
-    end to end. The model path exists in code and has not yet been run with a real key.
+    <strong>Two ways to write the code.</strong> With no paid AI account connected, a built-in template
+    produces a working service that answers from the plan itself. With an AI account connected, the
+    system asks the code-writing model for the service and its tests, and from the second attempt
+    onward hands the model the previous failure report so it can fix what broke. The template path has
+    been exercised end to end. The AI path exists in the code and has not yet been run with a live
+    account.
   </div>
   <div class="callout warn">
-    <strong>The remaining gap is deployment.</strong> A passed build is a folder of tested code with a
-    README. It does not yet launch on a port with a live URL. That is Phase C, planned and scoped, and it
-    needs no Docker. Two honest footnotes: in mock mode builds pass deterministically, since a template
-    passes its own tests; and the simulated per-stage token costs are still recorded in mock mode so the
-    unit economics behave like production, labeled as simulated in the ledger.
+    <strong>The remaining gap is launch.</strong> A finished build is a folder of tested code with
+    instructions. It does not yet start up at a web address on its own. That is the next phase, already
+    scoped, and it needs no extra infrastructure. Two honest footnotes: without an AI account the
+    template always passes its own tests, so failures only appear once real AI-written code is in play;
+    and in that no-account mode the system still records estimated AI costs, labeled as estimates, so
+    the money figures behave the way they will in production.
   </div>
 
-  <div class="eyebrow">Since the overnight build</div>
+  <div class="eyebrow">Progress since the first version</div>
   <h2>What changed after the first report</h2>
   <div class="timeline">
-    <div class="step"><div class="when">PHASE A · JULY 11</div>
-      <strong>Real code generation.</strong> The codegen stage writes five files per build to
-      <code class="inline">generated/{project}/{build}/</code>. The tests stage runs pytest against them.
-      First live build: Driver Settlement Calculator, iteration 3, 5 of 5 tests executed and passing,
-      $29.10 attributed.</div>
-    <div class="step"><div class="when">PHASE B · JULY 11</div>
-      <strong>Artifact viewer and download.</strong> Open any build in the dashboard and read each file
-      it produced, or download the workspace as a zip. Only files in the build's manifest are served,
-      and the path is confined to the workspace.</div>
-    <div class="step"><div class="when">HOUSEKEEPING · JULY 11</div>
-      <strong>Clean history.</strong> The seeded database had been tracked since the first commit. The
-      history was rewritten to remove it before the repository is shared anywhere. Unknown API paths now
-      return a proper 404 instead of the UI shell.</div>
+    <div class="step"><div class="when">PHASE A · JULY 2026</div>
+      <strong>Real code writing.</strong> The code stage now writes five files per build to a
+      workspace on disk, and the test stage runs the tests against them. First live build: a driver
+      settlement calculator for a freight client, third attempt, five of five tests executed and
+      passing, $29.10 in computing cost attributed.</div>
+    <div class="step"><div class="when">PHASE B · JULY 2026</div>
+      <strong>See what was built.</strong> Open any build on the dashboard and read each file it
+      produced, or download the whole set. Only files the build recorded can be served, and requests
+      cannot reach outside the build's own folder.</div>
+    <div class="step"><div class="when">HOUSEKEEPING · JULY 2026</div>
+      <strong>Clean history.</strong> A demo database had been saved into version history by mistake.
+      It was removed from every past version before the code went anywhere. Unknown web addresses under
+      the API now return a proper error instead of the dashboard.</div>
     <div class="step next"><div class="when">PHASE C · NEXT</div>
-      <strong>Run what was built.</strong> Launch a passed build on a port and record its URL, using the
-      process-based provider from the original machine. No Docker on this Mac, none needed.</div>
+      <strong>Run what was built.</strong> Start a finished build at a web address and record that
+      address, reusing a launcher from the earlier machine. No containers or extra servers required.</div>
   </div>
 
-  <div class="eyebrow">Independent audit</div>
-  <h2>Audited before it was reported</h2>
-  <p>Before the first version of this page existed, a five-lens adversarial audit ran over the code:
-  backend correctness, security, tenant isolation, frontend correctness, data integrity. Each finding
-  went to a separate verifier instructed to refute it by tracing the real code path.</p>
+  <div class="eyebrow">Independent review</div>
+  <h2>Checked before it was reported</h2>
+  <p>Before the first version of this page was published, an independent automated review examined the
+  code from five angles: correctness of the server logic, security, separation between clients,
+  correctness of the dashboard, and integrity of the data. Each issue it raised went to a second,
+  separate reviewer whose job was to prove the issue wrong by tracing the actual code. Only issues that
+  survived that challenge were treated as real.</p>
 
   <div class="statgrid" style="margin-top:20px">
-    <div class="stat"><b>17</b><span>findings raised</span></div>
+    <div class="stat"><b>17</b><span>issues raised</span></div>
     <div class="stat"><b>11</b><span>confirmed real</span></div>
-    <div class="stat"><b>11</b><span>fixed and committed</span></div>
-    <div class="stat"><b>5</b><span>refuted, correctly</span></div>
+    <div class="stat"><b>11</b><span>fixed and saved</span></div>
+    <div class="stat"><b>5</b><span>disproved, correctly</span></div>
   </div>
 
   <div class="callout warn" style="margin-top:18px">
-    <strong>One was critical.</strong> A path traversal hole in the static file route let an encoded
-    <code class="inline">../</code> read arbitrary files, including the database with every encrypted
-    credential. It is now confined to the build directory with a regression test, and all three attack
-    URLs were verified live to return the harmless app shell.
+    <strong>One was critical.</strong> A flaw in how the dashboard served its files could have let a
+    crafted web address read files it should never expose, including the database holding every
+    encrypted client credential. It was fixed the same day, a permanent test now guards against it, and
+    the three attack addresses were checked live to confirm they return nothing sensitive.
   </div>
 
   <div class="tablewrap">
     <table>
-      <thead><tr><th>Sev</th><th>Finding</th><th>Fix</th></tr></thead>
+      <thead><tr><th>Severity</th><th>What was found</th><th>What was done</th></tr></thead>
       <tbody>
-        <tr><td><span class="chip crit">crit</span></td><td>Path traversal in static route</td><td>Path confined to dist; regression test; verified live</td></tr>
-        <tr><td><span class="chip warn">major</span></td><td>Offboarding left builds running and billing</td><td>Cancels outstanding builds before the final export</td></tr>
-        <tr><td><span class="chip warn">major</span></td><td>A build failure could crash the pulse tick</td><td>Auto-requeue degrades to a log event</td></tr>
-        <tr><td><span class="chip warn">major</span></td><td>Drawers showed the previously viewed record</td><td>Poll refetches on selection change</td></tr>
-        <tr><td><span class="chip warn">major</span></td><td>Knowledge search did nothing</td><td>Refetches on filter; verified 10 results to 2</td></tr>
-        <tr><td><span class="chip sim">minor</span></td><td>Doubled mock cost events</td><td>Router and synthesized cost made exclusive</td></tr>
-        <tr><td><span class="chip sim">minor</span></td><td>Projection could fall below spend</td><td>Uses the real month length</td></tr>
-        <tr><td><span class="chip sim">minor</span></td><td>Three smaller (audit gap, chart, seed)</td><td>All fixed</td></tr>
+        <tr><td><span class="chip crit">critical</span></td><td>Dashboard could serve files outside its own folder</td><td>Confined to its folder; permanent test; verified live</td></tr>
+        <tr><td><span class="chip warn">major</span></td><td>Removing a client left their jobs running and billing</td><td>Jobs are cancelled before the final export</td></tr>
+        <tr><td><span class="chip warn">major</span></td><td>One failed build could stall the whole build line</td><td>Failure is logged and the line keeps moving</td></tr>
+        <tr><td><span class="chip warn">major</span></td><td>Detail panels showed the previously opened record</td><td>Panels refresh when the selection changes</td></tr>
+        <tr><td><span class="chip warn">major</span></td><td>Knowledge search did nothing</td><td>Search now filters; verified 10 results down to 2</td></tr>
+        <tr><td><span class="chip sim">minor</span></td><td>Estimated AI costs were counted twice</td><td>Counted once</td></tr>
+        <tr><td><span class="chip sim">minor</span></td><td>Monthly projection could show less than already spent</td><td>Uses the real number of days in the month</td></tr>
+        <tr><td><span class="chip sim">minor</span></td><td>Three smaller items (a logging gap, a chart, demo data)</td><td>All fixed</td></tr>
       </tbody>
     </table>
   </div>
-  <p style="font-size:14px;color:var(--ink-3)">Refuted correctly, no change made: a non-constant-time key
-  compare and OpenAPI exposure (the server binds to localhost only), the documented local-dev vault key,
-  and two checks against code that had already been fixed.</p>
+  <p style="font-size:14px;color:var(--ink-3)">Disproved and left unchanged: two items that only matter if
+  the server were exposed to the open internet (it is not), one about a development-only setting that
+  is already documented as such, and two that examined code that had already been fixed.</p>
 
-  <div class="eyebrow">What it cost to build</div>
+  <div class="eyebrow">How it was built, and what it cost</div>
   <h2>Build economics</h2>
-  <p>Figures below cover the overnight build that produced the first version of this page. The Phase A
-  and B follow-up was a small fraction of that and is not separately metered. Token counts are measured;
-  the dollar figure is an estimate, not an invoice.</p>
+  <p>The platform was produced by AI coding agents working under direction in one overnight session,
+  followed by a shorter follow-up for Phases A and B. The figures below cover the overnight build.
+  The token counts were measured directly; the dollar figure is an estimate rather than an invoice.</p>
 
   <div class="statgrid" style="margin-top:20px">
-    <div class="stat"><b>9,800</b><span>lines of code now</span></div>
-    <div class="stat"><b>36,400</b><span>words of docs</span></div>
-    <div class="stat"><b>3.79M</b><span>subagent tokens, measured</span></div>
-    <div class="stat"><b>$180–420</b><span>estimated cost, overnight</span></div>
+    <div class="stat"><b>9,800</b><span>lines of code today</span></div>
+    <div class="stat"><b>36,000</b><span>words of documentation</span></div>
+    <div class="stat"><b>3.79M</b><span>AI output tokens, measured</span></div>
+    <div class="stat"><b>$180 to $420</b><span>estimated AI cost, overnight</span></div>
   </div>
 
   <div class="tablewrap">
     <table>
       <thead><tr><th>Item</th><th>Amount</th><th>Source</th></tr></thead>
       <tbody>
-        <tr><td>Subagent output tokens, 52 agents in 3 workflows</td><td>3,794,672</td><td>measured</td></tr>
-        <tr><td>Docs library (18 agents)</td><td>1,146,588</td><td>measured</td></tr>
-        <tr><td>Frontend pages (12 agents)</td><td>937,854</td><td>measured</td></tr>
-        <tr><td>Adversarial audit (22 agents)</td><td>1,710,230</td><td>measured</td></tr>
-        <tr><td>Main conversation output</td><td>400k to 600k tokens</td><td>estimate</td></tr>
-        <tr><td>Total generation</td><td>4.2M to 4.4M output tokens</td><td>estimate</td></tr>
+        <tr><td>Output from 52 AI agents across 3 parallel work streams</td><td>3,794,672 tokens</td><td>measured</td></tr>
+        <tr><td>Documentation library (18 agents)</td><td>1,146,588</td><td>measured</td></tr>
+        <tr><td>Dashboard screens (12 agents)</td><td>937,854</td><td>measured</td></tr>
+        <tr><td>Independent review (22 agents)</td><td>1,710,230</td><td>measured</td></tr>
+        <tr><td>Direct coordinating work</td><td>400,000 to 600,000 tokens</td><td>estimate</td></tr>
+        <tr><td>Total generated</td><td>4.2 to 4.4 million tokens</td><td>estimate</td></tr>
         <tr><td><strong>Estimated cost, overnight build</strong></td><td><strong>$180 to $420</strong></td><td>estimate</td></tr>
       </tbody>
     </table>
   </div>
-  <p style="font-size:14px;color:var(--ink-3)">The dollar range assumes output tokens dominate the cost of
-  agentic coding at frontier output pricing of roughly $15 to $75 per million, plus cached input reads.
-  For an exact figure, check the session's usage against the plan. Roughly one line of committed, tested,
-  audited code per 460 output tokens; the rest bought the documentation library, the audit, and browser
-  verification.</p>
+  <p style="font-size:14px;color:var(--ink-3)">A token is the unit AI models are billed in, roughly
+  three quarters of a word. The dollar range assumes current market pricing for frontier models. For
+  scale, that works out to about one line of finished, tested, reviewed code per 460 tokens; the rest
+  paid for the documentation library, the independent review, and hands-on verification in a browser.</p>
 
   <div class="eyebrow">Saying it out loud</div>
   <h2>How to explain it</h2>
@@ -295,35 +327,53 @@
     <div class="quote"><div class="who">Plain</div>
       <p>A software company in a box. It interviews the client, builds the software, tests it, and runs
       the business disciplines around the work on its own.</p></div>
-    <div class="quote"><div class="who">Technical</div>
-      <p>A multi-tenant FastAPI and React platform where a completeness-scored intake engine feeds a
-      queued build pipeline that writes and tests real code, with cost attribution, model governance,
-      audit, SLA, and incident systems built into every operation.</p></div>
-    <div class="quote"><div class="who">Investor</div>
-      <p>The operating chassis of an AI software agency. The fourteen disciplines an acquirer checks in
-      diligence run as code from the first commit, and the build engine already produces tested
-      software.</p></div>
-    <div class="quote"><div class="who">Client-facing</div>
+    <div class="quote"><div class="who">For a client</div>
       <p>We interview you until your idea is specific enough to build. Then the machine builds it, tests
       it against your own requirements, and shows its work, including what it cost and how reliable it
       is.</p></div>
-    <div class="quote"><div class="who">Skeptical buyer</div>
-      <p>The ledger is real, the state machines are real, the isolation tests are real, and the builds
-      write and test real code. The one thing it does not do yet is launch that code on a server. The
-      repository says so plainly.</p></div>
+    <div class="quote"><div class="who">For an investor</div>
+      <p>The operating chassis of an AI software agency. The fourteen disciplines an acquirer checks in
+      due diligence run as code from the first day, and the build line already produces tested
+      software.</p></div>
+    <div class="quote"><div class="who">For a technical reader</div>
+      <p>A multi-client platform where a completeness-scored intake engine feeds a queued build pipeline
+      that writes and tests real code, with cost attribution, model governance, audit, service level,
+      and incident systems built into every operation.</p></div>
+    <div class="quote"><div class="who">For a skeptic</div>
+      <p>The cost ledger is real, the workflow rules are real, the client separation is tested, and the
+      builds write and test real code. The one thing it does not do yet is launch that code at a web
+      address. This page says so plainly.</p></div>
   </div>
 
   <div class="eyebrow">Next</div>
-  <h2>What needs a decision</h2>
+  <h2>What comes next</h2>
   <ol>
-    <li><strong>Phase C, deployment.</strong> A passed build launches on a port and gets a URL. Medium
-        effort, no Docker required.</li>
-    <li><strong>The idle queue.</strong> The pulse moved every project to review overnight, and delivery
-        is a human step by design, so the live queue sits empty. Either keep that honest gate, or let
-        the pulse also pull review projects that have no passing build yet.</li>
+    <li><strong>Phase C, launch.</strong> A finished build starts up at a web address and the address is
+        recorded. Medium effort, no new infrastructure.</li>
+    <li><strong>The approval gate.</strong> Finished work currently waits for a person to mark it
+        delivered. That is a deliberate choice, and it means the build line sits idle once everything
+        reaches review. The decision ahead is whether to keep that human sign-off or let work move on
+        automatically.</li>
+    <li><strong>Connect a live AI account.</strong> Everything on this page works without one. Connecting
+        one switches the code-writing step from the built-in template to AI-written code.</li>
   </ol>
 
-  <footer>THE SOFTWARE FACTORY · BUILD REPORT · JULY 2026</footer>
+  <div class="eyebrow">Terms used on this page</div>
+  <h2>Short glossary</h2>
+  <div class="tablewrap">
+    <table>
+      <tbody>
+        <tr><td><strong>Specification, or spec</strong></td><td>The written plan a build works from, produced by the interview.</td></tr>
+        <tr><td><strong>Build</strong></td><td>One attempt to turn a spec into working software. A project can take several.</td></tr>
+        <tr><td><strong>Automated test</strong></td><td>A small program that checks whether the software does what the spec says. Written alongside the software and run without a person.</td></tr>
+        <tr><td><strong>API</strong></td><td>The set of defined ways other software can ask this system to do something. Seventy-three of them exist today.</td></tr>
+        <tr><td><strong>Token</strong></td><td>The unit AI models are billed in, roughly three quarters of a word.</td></tr>
+        <tr><td><strong>Independent review</strong></td><td>An automated examination of the code by reviewers that did not write it, with each finding challenged before it counts.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>THE SOFTWARE FACTORY · BUILD REPORT · BROOKER CREEK WORKS · UPDATED SEPTEMBER 4, 2026</footer>
 </div>
 
 </body>
